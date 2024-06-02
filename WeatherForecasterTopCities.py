@@ -41,9 +41,10 @@ def WeatherForecasterTopCities():
 
     print()
 
-    graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no)")
+    title = "Temperature of Top Cities"
+    graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no) : ")
     if graphRep.lower() == 'y':
-        BarGraph(cityNamesList, temperaturesList, "Temperature of Top Cities")
+        BarGraph(cityNamesList, temperaturesList, title)
     elif graphRep.lower() == 'n':
         pass
     else:

@@ -2,12 +2,20 @@ import numpy as np
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from BarGraph import BarGraph
 
 def WeatherExtremesForecaster():
 
     url = "https://www.weather-forecast.com/maps/India"
 
-    Permission = requests.get(url).text
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Ensure we got a successful response
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data from {url}: {e}")
+        return False
+
+    Permission = response.text
 
     soup = BeautifulSoup(Permission, "lxml")
 
@@ -32,5 +40,15 @@ def WeatherExtremesForecaster():
 
     print(dataSheet)
 
-    return dataSheet
+    print()
 
+    title = "Temperature of Extreme Cities"
+    graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no) : ")
+    if graphRep.lower() == 'y':
+        BarGraph(cityNamesList, temperaturesList, title)
+    elif graphRep.lower() == 'n':
+        pass
+    else:
+        print("Invalid Input")
+
+    return dataSheet

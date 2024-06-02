@@ -1,5 +1,6 @@
 import pandas as pd
 from WeatherExtremesForecaster import WeatherExtremesForecaster
+from BarGraph import BarGraph
 
 def HotCities():
 
@@ -27,4 +28,14 @@ def HotCities():
     maxTemperaturecityName = cityNamesList[temperaturesList.index(maxTemperature)]
 
     print(f"The highest temperature is {maxTemperature}°C, recorded in {maxTemperaturecityName}.")
+
     print()
+
+    title = "Hottest Cities"
+    graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no) : ")
+    if graphRep.lower() == 'y':
+        BarGraph(cityNamesList, temperaturesList, title)
+    elif graphRep.lower() == 'n':
+        pass
+    else:
+        print("Invalid Input")
