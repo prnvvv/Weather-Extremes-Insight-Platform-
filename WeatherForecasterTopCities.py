@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from BarGraph import BarGraph
 
 def WeatherForecasterTopCities():
     
@@ -30,3 +31,14 @@ def WeatherForecasterTopCities():
     dataSheet = pd.DataFrame(data, index = sno)
     
     print(dataSheet)
+
+    print()
+
+    graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no)")
+    if graphRep.lower() == 'y':
+        BarGraph(cityNamesList, temperaturesList)
+    elif graphRep.lower() == 'n':
+        pass
+    else:
+        print("Invalid Input")
+
