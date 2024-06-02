@@ -8,7 +8,14 @@ def WeatherForecasterTopCities():
     
     url = "https://www.weather-forecast.com/"
 
-    Permission = requests.get(url).text
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data from {url}: {e}")
+        return False
+
+    Permission = response.text
 
     soup = BeautifulSoup(Permission, "lxml")
 
@@ -36,7 +43,7 @@ def WeatherForecasterTopCities():
 
     graphRep = input("Do you want to view the details in graph format?('Y' for yes and 'N' for no)")
     if graphRep.lower() == 'y':
-        BarGraph(cityNamesList, temperaturesList)
+        BarGraph(cityNamesList, temperaturesList, "Temperature of Top Cities")
     elif graphRep.lower() == 'n':
         pass
     else:
